@@ -1,0 +1,104 @@
+[tool.poetry]
+name = "starlette_auth"
+description = "Authentication library for Starlette."
+version = "0.1.0"
+authors = ["Alex Oleshkevich <alex.oleshkevich@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/alex-oleshkevich/starlette_auth"
+repository = "https://github.com/alex-oleshkevich/starlette_auth"
+documentation = "https://github.com/alex-oleshkevich/starlette_auth"
+keywords = []
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+starlette = "*"
+itsdangerous = "^2.2.0"
+starsessions = { optional = true, version = "*" }
+
+[tool.poetry.extras]
+starsessions = ["starsessions"]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3"
+pytest-asyncio = "^0.24"
+pytest-cov = "^5.0"
+mypy = "^1"
+starlette = "*"
+uvicorn = "*"
+jinja2 = "^3"
+starception = "*"
+starsessions = "^2.2.0"
+httpx = "^0.27.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.run]
+branch = true
+source = ["starlette_auth"]
+omit = ["tests/*", ".venv/*", ".git/*", "*/__main__.py", "examples"]
+
+[tool.coverage.report]
+exclude_also = [
+    "pragma: no cover",
+    "typing.Protocol",
+    "raise NotImplementedError"
+]
+
+[tool.mypy]
+files = ["starlette_auth", "examples", "tests"]
+pretty = true
+strict = true
+show_error_context = true
+show_column_numbers = true
+show_error_codes = true
+implicit_reexport = true
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+asyncio_mode = 'auto'
+asyncio_default_fixture_loop_scope = 'session'
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+norecursedirs = [
+    "node_modules", "frontend", "storage", "dist", ".git",
+    "*/migrations/*", "*/static/*", "docs", ".venv"
+]
+addopts = "--tb=short -s --no-cov-on-fail"
+testpaths = ["tests"]
+filterwarnings = []
+
+[tool.ruff]
+exclude = [
+    ".egg",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".tox",
+    ".venv",
+]
+line-length = 120
+indent-width = 4
+
+[tool.ruff.lint]
+fixable = ["ALL"]
+
+[tool.ruff.format]
+skip-magic-trailing-comma = false
