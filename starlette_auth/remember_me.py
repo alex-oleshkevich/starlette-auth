@@ -11,6 +11,8 @@ from starlette_auth.login import get_scopes, LoginScopes
 
 REMEMBER_COOKIE_NAME = "remember_me"
 
+_RT = typing.TypeVar("_RT", bound=Response)
+
 
 class RememberMeBackend(AuthenticationBackend):
     """Authenticates user using "remember me" cookie.
@@ -44,7 +46,7 @@ class RememberMeBackend(AuthenticationBackend):
 
 
 def remember_me(
-    response: Response,
+    response: _RT,
     secret_key: str,
     user: BaseUser,
     duration: datetime.timedelta,
@@ -55,7 +57,7 @@ def remember_me(
     cookie_samesite: typing.Literal["lax", "strict", "none"] = "lax",
     cookie_secure: bool = False,
     cookie_http_only: bool = True,
-) -> Response:
+) -> _RT:
     """Remember user by setting a cookie."""
     signer = itsdangerous.TimestampSigner(secret_key)
     value = signer.sign(user.identity).decode("utf8")
@@ -73,7 +75,7 @@ def remember_me(
 
 
 def forget_me(
-    response: Response,
+    response: _RT,
     *,
     cookie_name: str = REMEMBER_COOKIE_NAME,
     cookie_path: str = "/",
@@ -81,7 +83,7 @@ def forget_me(
     cookie_samesite: typing.Literal["lax", "strict", "none"] = "lax",
     cookie_secure: bool = False,
     cookie_http_only: bool = True,
-) -> Response:
+) -> _RT:
     """Forget user by removing 'remember me' cookie."""
     response.set_cookie(
         key=cookie_name,
