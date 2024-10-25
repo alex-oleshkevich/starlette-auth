@@ -1,4 +1,3 @@
-import abc
 import enum
 import hashlib
 import hmac
@@ -80,8 +79,7 @@ class MultiBackend(AuthenticationBackend):
         return None
 
 
-class HasSessionAuthHash(abc.ABC):  # pragma: no cover
-    @abc.abstractmethod
+class HasSessionAuthHash:  # pragma: no cover
     def get_password_hash(self) -> str:
         raise NotImplementedError
 
