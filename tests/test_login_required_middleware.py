@@ -10,7 +10,7 @@ from starlette.routing import Route
 from starlette.testclient import TestClient
 from starlette.types import Message
 
-from starlette_auth.middleware import LoginRequiredMiddleware
+from starlette_auth import LoginRequiredMiddleware
 from tests.conftest import User
 
 

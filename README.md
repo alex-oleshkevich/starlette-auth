@@ -20,7 +20,6 @@ pip install starlette_auth
 
 - __Vanilla Starlette integration.__ Following standards ensures compatibility with other libraries.
 - __Multiple backends.__ Supports multiple authentication backends (e.g. database, OAuth, etc.)
-- __Remember me.__ Persistent sessions with expiration time.
 - __Middleware__ to protect route segments.
 - Session fixation protection
 

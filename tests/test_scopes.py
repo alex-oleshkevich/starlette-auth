@@ -1,7 +1,7 @@
 from starlette.authentication import AuthCredentials
 from starlette.requests import Request
 
-from starlette_auth.scopes import confirm_login, is_confirmed, LoginScopes
+from starlette_auth.authentication import confirm_login, is_confirmed, LoginScopes
 from tests.conftest import User
 
 

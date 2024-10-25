@@ -3,6 +3,8 @@ import dataclasses
 import pytest
 from starlette.authentication import BaseUser
 
+from starlette_auth.authentication import HasSessionAuthHash
+
 
 @dataclasses.dataclass
 class User(BaseUser):
@@ -24,3 +26,11 @@ class User(BaseUser):
 @pytest.fixture
 def user() -> User:
     return User(username="root")
+
+
+@dataclasses.dataclass
+class UserWithSessionHash(User, HasSessionAuthHash):
+    password: str
+
+    def get_password_hash(self) -> str:
+        return self.password
