@@ -109,10 +109,10 @@ async def login(connection: HTTPConnection, user: BaseUser, secret_key: str) -> 
     # SESSION_KEY is set from the outside. In this case we need to run several
     # security checks to ensure that SESSION_KEY is valid.
     session_auth_hash = ""
-    if SESSION_KEY in connection.session:
-        if isinstance(user, HasSessionAuthHash):
-            session_auth_hash = user.get_session_auth_hash(secret_key)
+    if isinstance(user, HasSessionAuthHash):
+        session_auth_hash = user.get_session_auth_hash(secret_key)
 
+    if SESSION_KEY in connection.session:
         if any(
             [
                 # if we have other user id in the session and this is not the same user
